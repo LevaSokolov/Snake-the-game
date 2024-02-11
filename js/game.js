@@ -25,6 +25,7 @@ snake[0] = {
 document.addEventListener("keydown", direction);
 
 let dir;
+let game;
 
 function direction(event) {
   if (event.keyCode == 37 && dir != "right") dir = "left";
@@ -36,6 +37,11 @@ function direction(event) {
 function eatTail(head, arr) {
   for (let i = 0; i < arr.length; i++)
     if (head.x == arr[i].x && head.y == arr[i].y) clearInterval(game);
+}
+
+function showGameOver() {
+  let modal = document.getElementById("modal");
+  modal.setAttribute("class", "visible");
 }
 
 function drawGame() {
@@ -65,13 +71,16 @@ function drawGame() {
     snake.pop();
   }
 
+  // CHECKING FOR OUT OF BOUNDS AND CALLING THE RESTART FUNCTION
   if (
     snakeX < box ||
     snakeX > box * 17 ||
     snakeY < 3 * box ||
     snakeY > box * 17
-  )
+  ) {
+    showGameOver();
     clearInterval(game);
+  }
 
   if (dir == "left") snakeX -= box;
   if (dir == "right") snakeX += box;
@@ -88,4 +97,24 @@ function drawGame() {
   snake.unshift(newHead);
 }
 
-let game = setInterval(drawGame, 100);
+function gameStart() {
+  game = setInterval(drawGame, 120);
+}
+
+function gameRestart() {
+  dir = undefined;
+  score = 0;
+  snake = [
+    {
+      x: 9 * box,
+      y: 10 * box,
+    },
+  ];
+  gameStart();
+  let modal = document.getElementById("modal");
+  modal.setAttribute("class", "hidden");
+}
+const playAgainButton = document.getElementById("play-again");
+playAgainButton.addEventListener("click", gameRestart);
+
+gameStart();

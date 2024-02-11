@@ -7,8 +7,18 @@
         <title>Игра на js</title>
         <link rel="stylesheet" href="css/style.css">
     </head>
-    <body>
+    <body style="background-color: gray;position: relative;">
         <canvas id="game" width="608" height="608"></canvas>
+        <div id="modal" class="hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                  <h3 class="modal-title">Game over</h3>
+                </div>
+                <div class="modal-body">
+                    <button id="play-again">Play again</button>
+                </div>
+              </div>
+        </div>
         <script src="js/game.js"></script>
     </body>
 </html>
