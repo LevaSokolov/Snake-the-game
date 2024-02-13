@@ -19,6 +19,23 @@ canvas {
     transition: 300ms ease-in;
 }
 
+#play-again-btn {
+    margin-top: 20px;
+    height: 46px;
+    width: 160px;
+    font-size: large;
+    opacity: 70%;
+    border: none;
+    background-color: rgb(50, 143, 47);
+    transition: 300ms;
+}
+
+#play-again-btn:hover {
+    opacity: 100%;
+    scale: 104%;
+}
+
+
 .modal-content {
     font-size: 42px;
     height: 100%;
