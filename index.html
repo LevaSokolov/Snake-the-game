@@ -1,24 +1,23 @@
 <!DOCTYPE html>
 <html lang="ru">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewpoet" content="width=device-width", initial-scale="1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Игра на js</title>
-        <link rel="stylesheet" href="css/style.css">
-    </head>
-    <body style="background-color: gray;position: relative;">
-        <canvas id="game" width="608" height="608"></canvas>
-        <div id="modal" class="hidden">
-            <div class="modal-content">
-                <div class="modal-header">
-                  <h3 class="modal-title">Game over</h3>
-                </div>
-                <div class="modal-body">
-                    <button id="play-again-btn">Play again</button>
-                </div>
-              </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewpoet" content="width=device-width" , initial-scale="1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Игра на js</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body style="background-color: gray; position: relative">
+    <canvas id="game" width="608" height="608"></canvas>
+    <div id="modal" class="hidden">
+      <div class="modal-content">
+        <div>
+          <h3 class="game-over-title">Game over!</h3>
+          <h3>Press any button</h3>
         </div>
-        <script src="js/game.js"></script>
-    </body>
+        <div class="modal-body"></div>
+      </div>
+    </div>
+    <script src="js/game.js"></script>
+  </body>
 </html>
