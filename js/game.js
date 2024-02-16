@@ -7,28 +7,26 @@ ground.src = "img/ground.png";
 const foodImg = new Image();
 foodImg.src = "img/apple.png";
 
-let box = 32;
+const BOX = 32;
 
 let score = 0;
 
 let food = {
-  x: Math.floor(Math.random() * 17 + 1) * box,
-  y: Math.floor(Math.random() * 15 + 3) * box,
+  x: Math.floor(Math.random() * 17 + 1) * BOX,
+  y: Math.floor(Math.random() * 15 + 3) * BOX,
 };
 
 let snake = [];
 snake[0] = {
-  x: 9 * box,
-  y: 10 * box,
+  x: 9 * BOX,
+  y: 10 * BOX,
 };
-
-document.addEventListener("keydown", onDirectionChange);
 
 let dir;
 let game;
 let isBtnPressed;
 
-function onDirectionChange(event) {
+let onDirectionChange = (event) => {
   if (isBtnPressed) return;
 
   if (event.keyCode == 37 && dir != "right") dir = "left";
@@ -36,21 +34,22 @@ function onDirectionChange(event) {
   else if (event.keyCode == 39 && dir != "left") dir = "right";
   else if (event.keyCode == 40 && dir != "up") dir = "down";
   isBtnPressed = true;
-}
+};
+document.addEventListener("keydown", onDirectionChange);
 
-function eatTail(head, arr) {
+let eatTail = (head, arr) => {
   for (let i = 0; i < arr.length; i++)
     if (head.x == arr[i].x && head.y == arr[i].y) showGameOver();
-}
+};
 
-function showGameOver() {
+let showGameOver = () => {
   clearInterval(game);
   let modal = document.getElementById("modal");
   modal.setAttribute("class", "visible");
   document.addEventListener("keydown", gameStart);
-}
+};
 
-function drawGame() {
+let drawGame = () => {
   isBtnPressed = false;
   ctx.drawImage(ground, 0, 0);
 
@@ -58,12 +57,12 @@ function drawGame() {
 
   for (let i = 0; i < snake.length; i++) {
     ctx.fillStyle = i == 0 ? "limegreen" : "darkgreen";
-    ctx.fillRect(snake[i].x, snake[i].y, box, box);
+    ctx.fillRect(snake[i].x, snake[i].y, BOX, BOX);
   }
 
   ctx.fillStyle = "white";
   ctx.font = "50px Arial";
-  ctx.fillText(score, box * 2.5, box * 1.7);
+  ctx.fillText(score, BOX * 2.5, BOX * 1.7);
 
   let snakeHeadX = snake[0].x;
   let snakeHeadY = snake[0].y;
@@ -71,8 +70,8 @@ function drawGame() {
   if (snakeHeadX == food.x && snakeHeadY == food.y) {
     score++;
     food = {
-      x: Math.floor(Math.random() * 17 + 1) * box,
-      y: Math.floor(Math.random() * 15 + 3) * box,
+      x: Math.floor(Math.random() * 17 + 1) * BOX,
+      y: Math.floor(Math.random() * 15 + 3) * BOX,
     };
   } else {
     snake.pop();
@@ -80,43 +79,43 @@ function drawGame() {
 
   // CHECKING FOR OUT OF BOUNDS AND CALLING THE RESTART FUNCTION
   if (
-    snakeHeadX < box ||
-    snakeHeadX > box * 17 ||
-    snakeHeadY < 3 * box ||
-    snakeHeadY > box * 17
+    snakeHeadX < BOX ||
+    snakeHeadX > BOX * 17 ||
+    snakeHeadY < 3 * BOX ||
+    snakeHeadY > BOX * 17
   ) {
     showGameOver();
     return;
   }
 
-  if (dir == "left") snakeHeadX -= box;
-  if (dir == "right") snakeHeadX += box;
-  if (dir == "up") snakeHeadY -= box;
-  if (dir == "down") snakeHeadY += box;
+  if (dir == "left") snakeHeadX -= BOX;
+  if (dir == "right") snakeHeadX += BOX;
+  if (dir == "up") snakeHeadY -= BOX;
+  if (dir == "down") snakeHeadY += BOX;
 
-  let newHead = {
+  const NEWHEAD = {
     x: snakeHeadX,
     y: snakeHeadY,
   };
 
-  eatTail(newHead, snake);
+  eatTail(NEWHEAD, snake);
 
-  snake.unshift(newHead);
-}
+  snake.unshift(NEWHEAD);
+};
 
-function gameStart() {
+let gameStart = () => {
   document.removeEventListener("keydown", gameStart);
   let modal = document.getElementById("modal");
   dir = undefined;
   score = 0;
   snake = [
     {
-      x: 9 * box,
-      y: 10 * box,
+      x: 9 * BOX,
+      y: 10 * BOX,
     },
   ];
   game = setInterval(drawGame, 100);
   modal.setAttribute("class", "hidden");
-}
+};
 
 gameStart();
