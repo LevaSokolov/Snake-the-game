@@ -5,9 +5,22 @@
   /* cursor: none; */
 }
 
+#body {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(167, 167, 151);
+}
+
 canvas {
   display: block;
   margin: 0 auto;
+  margin-top: 20px;
+}
+
+#score-table {
+  margin: 0 auto;
+  font-size: 52px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
 #modal {
